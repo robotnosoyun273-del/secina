@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Secina — Antojería de Barrio | Narvarte CDMX</title>
+  <meta name="description" content="Tacos de cecina, sopes, tlayuda y tragos en la Narvarte. Obrero Mundial 305, CDMX. Tel: 55 6730-2462">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&family=Boogaloo&display=swap" rel="stylesheet">
+
+  <style>
+  @font-face {
+    font-family: 'Blippo Pro Black';
+    src: url('./assets/lasecina/BlippoBlack.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --teal:      #5BBFC0;
+    --teal2:     #3A9B9C;
+    --teal-dark: #1A4545;
+    --naranja:   #D97B2E;
+    --naranja2:  #F09040;
+    --blanco:    #FFFFFF;
+    --claro:     #F2FBFB;
+    --claro2:    #E8F7F7;
+    --claro3:    #D8EEEE;
+    --texto:     #1C3535;
+    --texto2:    #2E4F4F;
+    --gris:      #5A7B7B;
+    --borde:     rgba(91,191,192,0.22);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--blanco);
+    color: var(--texto);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── APPLE EMOJIS ── */
+  .e {
+    display: inline-block;
+    width: 1.15em; height: 1.15em;
+    vertical-align: -0.2em;
+    object-fit: contain;
+  }
+  .e-md {
+    display: inline-block;
+    width: 1.6rem; height: 1.6rem;
+    object-fit: contain;
+    vertical-align: middle;
+  }
+  .e-lg {
+    display: inline-block;
+    width: 2.2rem; height: 2.2rem;
+    object-fit: contain;
+  }
+  .e-xl {
+    display: inline-block;
+    width: 3rem; height: 3rem;
+    object-fit: contain;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(44px);
+    transition: opacity 0.75s cubic-bezier(.4,0,.2,1), transform 0.75s cubic-bezier(.4,0,.2,1);
+  }
+  .reveal.left  { transform: translateX(-44px); }
+  .reveal.right { transform: translateX(44px); }
+  .reveal.scale { transform: scale(0.92) translateY(24px); }
+  .reveal.in {
+    opacity: 1;
+    transform: translate(0) scale(1);
+  }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+  .reveal-d5 { transition-delay: 0.5s; }
+
+  /* Parallax */
+  .parallax-el { will-change: transform; }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--borde);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; }
+  .nav-logo-text {
+    font-family: 'Blippo Pro Black', 'Boogaloo', cursive;
+    font-size: 1.35rem;
+    color: var(--teal);
+    -webkit-text-stroke: 1.5px var(--naranja);
+    paint-order: stroke fill;
+    letter-spacing: 0.01em;
+    line-height: 1;
+  }
+  .nav-links {
+    display: flex; gap: 1.5rem;
+    font-size: 0.8rem; font-weight: 500;
+    color: var(--gris);
+  }
+  .nav-links a { transition: color 0.2s; color: var(--gris); }
+  .nav-links a:hover { color: var(--teal); }
+  @media(max-width:520px){ .nav-links { display: none; } }
+  .nav-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--teal);
+    color: #fff;
+    padding: 9px 18px;
+    border-radius: 50px;
+    font-size: 0.82rem; font-weight: 700;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--teal2); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 90px 24px 64px;
+    text-align: center;
+    overflow: hidden;
+    background: var(--blanco);
+  }
+
+  /* Sunburst girando lento — replica el logo */
+  .hero-sunburst {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-sunburst::before {
+    content: '';
+    position: absolute;
+    width: 200vmax; height: 200vmax;
+    background: repeating-conic-gradient(
+      rgba(91,191,192,0.13) 0deg 6deg,
+      transparent 6deg 12deg
+    );
+    animation: sunSpin 90s linear infinite;
+    transform-origin: center center;
+  }
+  .hero-sunburst::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 55% 50% at 50% 50%,
+      rgba(255,255,255,0) 30%, rgba(255,255,255,0.92) 80%);
+  }
+  @keyframes sunSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* Aros decorativos girando */
+  .hero-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid rgba(91,191,192,0.18);
+    pointer-events: none;
+  }
+  .hero-ring-1 {
+    width: 520px; height: 520px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 60s linear infinite;
+  }
+  .hero-ring-2 {
+    width: 800px; height: 800px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 90s linear infinite reverse;
+  }
+  .hero-ring-3 {
+    width: 1100px; height: 1100px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 120s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .hero-inner { position: relative; z-index: 2; }
+
+  /* Logo de texto — Blippo Pro Black con trazo naranja, igual que el logo original */
+  .hero-logo-text {
+    font-family: 'Blippo Pro Black', 'Boogaloo', cursive;
+    font-size: clamp(72px, 22vw, 160px);
+    color: var(--teal);
+    -webkit-text-stroke: clamp(3px, 0.8vw, 7px) var(--naranja);
+    paint-order: stroke fill;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    margin: 0 auto 16px;
+    display: block;
+    text-shadow: 0 4px 32px rgba(91,191,192,0.18);
+    animation: logoFloat 7s ease-in-out infinite;
+    user-select: none;
+  }
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(91,191,192,0.1);
+    border: 1px solid rgba(91,191,192,0.35);
+    color: var(--teal2);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(15px, 4vw, 20px);
+    font-style: italic;
+    color: var(--gris);
+    margin-bottom: 32px;
+  }
+
+  .hero-ctas {
+    display: flex; flex-direction: column; gap: 11px;
+    width: 100%; max-width: 320px;
+    margin: 0 auto 44px;
+  }
+  @media(min-width:480px){ .hero-ctas { flex-direction: row; max-width: 440px; } }
+
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 15px 22px;
+    border-radius: 14px;
+    font-size: 14px; font-weight: 700;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer; border: none; letter-spacing: 0.01em;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-teal {
+    background: var(--teal);
+    color: #fff;
+    box-shadow: 0 5px 24px rgba(91,191,192,0.45);
+  }
+  .btn-teal:hover { background: var(--teal2); }
+  .btn-ghost {
+    background: rgba(91,191,192,0.08);
+    border: 1.5px solid rgba(91,191,192,0.3);
+    color: var(--teal2);
+  }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); background: rgba(91,191,192,0.14); }
+  .btn-naranja {
+    background: var(--naranja);
+    color: #fff;
+    box-shadow: 0 5px 24px rgba(217,123,46,0.45);
+  }
+  .btn-naranja:hover { background: var(--naranja2); }
+
+  /* Stats hero */
+  .hero-stats {
+    display: flex; gap: 32px; justify-content: center;
+    border-top: 1px solid rgba(91,191,192,0.2);
+    padding-top: 28px;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900;
+    color: var(--teal); line-height: 1;
+  }
+  .stat-label {
+    font-size: 10px; font-weight: 600;
+    color: var(--gris);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    margin-top: 4px;
+  }
+
+  /* Scroll hint */
+  .hero-scroll {
+    position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: rgba(91,191,192,0.5);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, transparent, rgba(91,191,192,0.6));
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ── SECCIONES COMUNES ── */
+  .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 70px 0; position: relative; overflow: hidden; }
+  .sec-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 10px;
+  }
+  .sec-tag-orange { color: var(--naranja2); }
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 7vw, 42px);
+    font-weight: 700;
+    line-height: 1.12; margin-bottom: 14px;
+    color: var(--texto);
+  }
+  .sec-title em { color: var(--teal); font-style: italic; }
+  .sec-sub { font-size: 15px; color: var(--gris); line-height: 1.7; }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--claro);
+  }
+  /* Fondo con puntos en movimiento */
+  .about::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(91,191,192,0.22) 1px, transparent 1px);
+    background-size: 32px 32px;
+    animation: dotsDrift 20s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes dotsDrift {
+    from { background-position: 0 0; }
+    to   { background-position: 32px 32px; }
+  }
+
+  .feat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 28px;
+  }
+  .feat-card {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(91,191,192,0.22);
+    border-radius: 18px;
+    padding: 22px 16px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  }
+  .feat-card:hover {
+    border-color: rgba(91,191,192,0.45);
+    background: #fff;
+    box-shadow: 0 6px 24px rgba(91,191,192,0.12);
+  }
+  .feat-icon { margin-bottom: 10px; }
+  .feat-name { font-size: 14px; font-weight: 700; color: var(--texto); }
+  .feat-desc { font-size: 12px; color: var(--gris); margin-top: 4px; }
+
+  /* ── GALLERY — horizontal scroll type la-coyoacana ── */
+  .gallery { background: var(--blanco); padding: 56px 0; }
+  .gallery-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 700;
+    color: var(--texto); text-align: center;
+    margin-bottom: 24px;
+    padding: 0 20px;
+  }
+  .gallery-title em { color: var(--teal); font-style: italic; }
+  .gal-scroll {
+    display: flex; gap: 10px;
+    overflow-x: auto;
+    padding: 0 20px 12px;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+  .gal-scroll::-webkit-scrollbar { display: none; }
+  .gal-card {
+    flex: 0 0 240px; height: 300px;
+    border-radius: 18px; overflow: hidden;
+    position: relative; scroll-snap-align: start;
+    border: 1.5px solid rgba(91,191,192,0.25);
+    box-shadow: 0 4px 18px rgba(91,191,192,0.1);
+  }
+  .gal-card img {
+    width: 100%; height: 100%;
+    object-fit: cover; transition: transform 0.5s;
+  }
+  .gal-card:hover img { transform: scale(1.08); }
+  .gal-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, transparent 100%);
+    padding: 20px 14px 12px;
+    color: var(--crema); font-size: 13px; font-weight: 600;
+  }
+  @media(min-width:640px){ .gal-card { flex: 0 0 280px; height: 360px; } }
+
+  /* ── MENÚ (formato la-coyoacana) ── */
+  .menu-section {
+    background: var(--claro2);
+  }
+  /* Fondo con líneas diagonales en movimiento */
+  .menu-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(91,191,192,0.1) 0px, rgba(91,191,192,0.1) 1px,
+      transparent 1px, transparent 40px
+    );
+    animation: diagDrift 25s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes diagDrift {
+    from { background-position: 0 0; }
+    to   { background-position: 56px 56px; }
+  }
+
+  .menu-section .sec-title { color: var(--texto); }
+  .menu-section .sec-title em { color: var(--teal); }
+  .menu-section .sec-sub { color: var(--gris); }
+
+  .menu-nav {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 24px;
+  }
+  .menu-arrow {
+    flex-shrink: 0;
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1.5px solid rgba(91,191,192,0.3);
+    background: rgba(255,255,255,0.85);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--teal2);
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(91,191,192,0.1);
+  }
+  .menu-arrow:hover:not(:disabled) {
+    background: var(--teal);
+    color: #fff;
+    border-color: var(--teal);
+    box-shadow: 0 4px 16px rgba(91,191,192,0.35);
+  }
+  .menu-arrow:disabled { opacity: 0.25; cursor: not-allowed; }
+  .menu-arrow svg { width: 18px; height: 18px; stroke: currentColor; }
+
+  .menu-tabs {
+    flex: 1;
+    display: flex; gap: 8px;
+    overflow-x: auto; padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .menu-tab {
+    flex-shrink: 0;
+    display: flex; align-items: center; gap: 7px;
+    padding: 9px 18px;
+    border-radius: 100px;
+    border: 1.5px solid rgba(91,191,192,0.28);
+    background: rgba(255,255,255,0.6);
+    font-size: 13px; font-weight: 600;
+    color: var(--gris);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .menu-tab.active {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #fff;
+  }
+  .menu-tab:hover:not(.active) { border-color: var(--teal); color: var(--teal); }
+
+  .menu-cat { display: none; }
+  .menu-cat.active { display: block; }
+
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: var(--teal);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cat-title::after { content: ''; flex: 1; height: 1px; background: rgba(91,191,192,0.2); }
+
+  .menu-items { display: flex; flex-direction: column; }
+  .menu-item {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid rgba(91,191,192,0.1);
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .mi-info { flex: 1; }
+  .mi-name { font-size: 15px; font-weight: 600; color: var(--texto); margin-bottom: 3px; }
+  .mi-desc { font-size: 13px; color: var(--gris); line-height: 1.5; }
+  .mi-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 9px; border-radius: 100px; margin-top: 5px;
+  }
+  .tag-sig { background: rgba(91,191,192,0.15); color: var(--teal); }
+  .tag-hot { background: rgba(217,123,46,0.15); color: var(--naranja2); }
+  .mi-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--naranja2); white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Foto del menú físico */
+  .menu-cat-photo {
+    width: 100%; border-radius: 16px;
+    overflow: hidden; margin-bottom: 20px;
+    border: 1px solid rgba(91,191,192,0.15);
+    position: relative;
+  }
+  .menu-cat-photo img {
+    width: 100%; height: 200px;
+    object-fit: cover; display: block;
+    transition: transform 0.4s;
+  }
+  .menu-cat-photo:hover img { transform: scale(1.04); }
+
+  .menu-nota {
+    margin-top: 20px;
+    background: rgba(91,191,192,0.08);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 12px 12px 0;
+    padding: 13px 15px;
+    font-size: 13px; color: var(--gris);
+  }
+
+  /* ── INSTAGRAM ── */
+  .ig-section {
+    background: var(--claro);
+    padding: 64px 0;
+    position: relative; overflow: hidden;
+  }
+  /* Fondo con gradiente animado */
+  .ig-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: conic-gradient(
+      from 0deg at 80% 20%,
+      rgba(91,191,192,0.08) 0deg,
+      transparent 120deg,
+      rgba(217,123,46,0.06) 240deg,
+      transparent 360deg
+    );
+    animation: conicSpin 40s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes conicSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .ig-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 24px; padding: 0 20px;
+  }
+  .ig-avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    border: 2.5px solid transparent;
+    background:
+      linear-gradient(var(--claro), var(--claro)) padding-box,
+      linear-gradient(135deg, #5BBFC0, #D97B2E, #5BBFC0) border-box;
+    overflow: hidden; flex-shrink: 0;
+  }
+  .ig-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .ig-info { flex: 1; }
+  .ig-handle { font-weight: 700; font-size: 15px; color: var(--texto); }
+  .ig-stats { font-size: 12px; color: var(--gris); margin-top: 2px; }
+  .ig-stats strong { color: var(--texto2); }
+  .ig-follow {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(135deg, var(--teal), #2A8A8B);
+    color: #fff; border-radius: 10px;
+    padding: 9px 18px;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Grid 3×3 estilo Instagram — igual que la-coyoacana */
+  .ig-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-bottom: 20px;
+  }
+  .ig-post {
+    aspect-ratio: 1;
+    position: relative; overflow: hidden;
+    background: var(--claro2);
+    cursor: pointer;
+  }
+  .ig-post img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .ig-post:hover img { transform: scale(1.1); }
+  .ig-overlay {
+    position: absolute; inset: 0;
+    background: rgba(91,191,192,0.45);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.25s;
+  }
+  .ig-post:hover .ig-overlay { opacity: 1; }
+  .ig-overlay svg { width: 28px; height: 28px; fill: #fff; }
+
+  .ig-cta {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin: 0 20px;
+    padding: 15px;
+    border: 1.5px solid rgba(91,191,192,0.3);
+    border-radius: 14px;
+    color: var(--gris);
+    font-size: 14px; font-weight: 600;
+    transition: all 0.2s;
+    position: relative; z-index: 1;
+    background: rgba(255,255,255,0.7);
+  }
+  .ig-cta:hover { border-color: var(--teal); color: var(--teal); background: #fff; }
+
+  /* ── HORARIOS ── */
+  .horarios {
+    background: var(--claro2);
+    position: relative; overflow: hidden;
+  }
+  /* Rayas horizontales en movimiento */
+  .horarios::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(91,191,192,0.1) 0px, rgba(91,191,192,0.1) 1px,
+      transparent 1px, transparent 48px
+    );
+    animation: stripeDrift 15s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes stripeDrift {
+    from { background-position: 0 0; }
+    to   { background-position: 0 48px; }
+  }
+
+  .horarios .sec-tag { color: var(--naranja2); }
+  .hours-table {
+    margin-top: 28px;
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid rgba(91,191,192,0.12);
+    position: relative; z-index: 1;
+  }
+  .hour-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(91,191,192,0.15);
+    font-size: 14px; background: rgba(255,255,255,0.55);
+    transition: background 0.2s;
+  }
+  .hour-row:hover { background: rgba(255,255,255,0.85); }
+  .hour-row:last-child { border-bottom: none; }
+  .hour-day { font-weight: 600; color: var(--texto); }
+  .hour-time { color: var(--teal2); font-weight: 600; }
+  .hour-closed { color: var(--gris); font-style: italic; opacity: 0.6; }
+  .hour-badge {
+    background: var(--teal);
+    color: #fff;
+    font-size: 10px; font-weight: 700;
+    padding: 3px 9px; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  .open-indicator {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 18px;
+    font-size: 13px; color: var(--gris);
+    position: relative; z-index: 1;
+  }
+  .dot-green {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px rgba(74,222,128,0.6);
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* Mapa */
+  .map-wrap {
+    margin-top: 24px;
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid rgba(91,191,192,0.15);
+    position: relative; z-index: 1;
+  }
+  .map-wrap iframe { width: 100%; height: 260px; display: block; border: none; }
+  .address-row {
+    background: rgba(91,191,192,0.08);
+    padding: 15px 20px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 12px;
+  }
+  .address-text { font-size: 14px; color: var(--texto); font-weight: 500; }
+  .address-link { font-size: 13px; font-weight: 700; color: var(--teal); white-space: nowrap; flex-shrink: 0; }
+
+  /* ── CTA FINAL ── */
+  .cta-final {
+    background: var(--teal2);
+    padding: 72px 20px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  /* Burbujas flotantes */
+  .cta-final::before, .cta-final::after {
+    content: '';
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .cta-final::before { width: 300px; height: 300px; top: -80px; right: -60px; animation: bubbleFloat 8s ease-in-out infinite; }
+  .cta-final::after  { width: 220px; height: 220px; bottom: -70px; left: -60px; animation: bubbleFloat 10s ease-in-out infinite reverse; }
+  @keyframes bubbleFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%       { transform: translateY(-20px) scale(1.05); }
+  }
+
+  .cta-final .sec-tag { color: rgba(255,255,255,0.65); }
+  .cta-final .sec-title { color: #fff; }
+  .cta-final .sec-title em { color: rgba(255,255,255,0.85); font-style: italic; }
+  .cta-final .sec-sub { color: rgba(255,255,255,0.75); max-width: 440px; margin: 0 auto 36px; }
+  .cta-btns {
+    display: flex; flex-direction: column; gap: 11px;
+    max-width: 320px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  @media(min-width:480px){ .cta-btns { flex-direction: row; max-width: 460px; } }
+  .btn-wa {
+    background: #25D366; color: #fff;
+    box-shadow: 0 5px 22px rgba(37,211,102,0.45);
+  }
+  .btn-wa:hover { background: #1ebe5d; }
+  .btn-outline-white {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.22); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--claro2);
+    padding: 36px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(91,191,192,0.22);
+  }
+  .footer-logo-text {
+    font-family: 'Blippo Pro Black', 'Boogaloo', cursive;
+    font-size: 2.4rem;
+    color: var(--teal);
+    -webkit-text-stroke: 2px var(--naranja);
+    paint-order: stroke fill;
+    display: block;
+    margin: 0 auto 14px;
+    line-height: 1;
+  }
+  .footer-links {
+    display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 18px; margin-bottom: 14px;
+  }
+  .footer-links a { font-size: 13px; color: var(--gris); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal); }
+  .footer-copy { font-size: 11px; color: var(--gris); opacity: 0.5; }
+
+  /* Nombre del negocio inline — misma tipografía y colores que el logo */
+  .logo-name {
+    font-family: 'Blippo Pro Black', 'Boogaloo', cursive;
+    color: var(--teal);
+    -webkit-text-stroke: clamp(1px, 0.25vw, 2.5px) var(--naranja);
+    paint-order: stroke fill;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── FLOATING WHATSAPP ── */
+  .float-wa {
+    position: fixed; bottom: 22px; right: 22px; z-index: 999;
+    width: 58px; height: 58px;
+    background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+    animation: waPulse 3s infinite;
+    transition: transform 0.2s;
+  }
+  .float-wa:hover { transform: scale(1.1); }
+  .float-wa svg { width: 30px; height: 30px; fill: #fff; }
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
+    50% { box-shadow: 0 6px 40px rgba(37,211,102,0.8); }
+  }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">
+    <span class="nav-logo-text">la secina</span>
+  </div>
+  <div class="nav-links">
+    <a href="#menu">Menú</a>
+    <a href="#instagram">Instagram</a>
+    <a href="#horarios">Horarios</a>
+  </div>
+  <a class="nav-cta" href="https://wa.me/525567302462?text=Hola%20La%20Secina%2C%20quiero%20reservar" target="_blank" rel="noopener">
+    <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4f2.png" alt="📲"> Reservar
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-sunburst"></div>
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-ring hero-ring-3"></div>
+
+  <div class="hero-inner">
+    <span class="hero-logo-text reveal scale">la secina</span>
+
+    <div class="hero-badge reveal reveal-d1">
+      <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f1f2-1f1fd.png" alt="🇲🇽">
+      Narvarte Poniente · CDMX
+    </div>
+
+    <p class="hero-sub reveal reveal-d2">Antojería de barrio con alma y sabor</p>
+
+    <div class="hero-ctas reveal reveal-d3">
+      <a class="btn btn-teal" href="#menu">
+        <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f37d-fe0f.png" alt="🍽"> Ver Menú
+      </a>
+      <a class="btn btn-ghost" href="https://wa.me/525567302462?text=Hola%2C%20quiero%20reservar" target="_blank" rel="noopener">
+        <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4f2.png" alt="📲"> Reservar
+      </a>
+    </div>
+
+    <div class="hero-stats reveal reveal-d4">
+      <div>
+        <div class="stat-num">6.5K</div>
+        <div class="stat-label">Seguidores</div>
+      </div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Años</div>
+      </div>
+      <div>
+        <div class="stat-num">$200</div>
+        <div class="stat-label">Por persona</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section class="about">
+  <div class="container">
+    <span class="sec-tag reveal">
+      <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f33f.png" alt="🌿"> Nuestro lugar
+    </span>
+    <h2 class="sec-title reveal reveal-d1">Un pequeño <em>paraíso</em><br>en la Narvarte</h2>
+    <p class="sec-sub reveal reveal-d2">Cecina de Yecapixtla, antojitos de barrio y tragos de autor. El comal siempre prendido, el corazón siempre lleno.</p>
+
+    <div class="feat-grid">
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-icon"><img class="e-lg" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1fad5.png" alt="🫕"></div>
+        <div class="feat-name">Cocina abierta</div>
+        <div class="feat-desc">El comal visible desde tu mesa</div>
+      </div>
+      <div class="feat-card reveal reveal-d2">
+        <div class="feat-icon"><img class="e-lg" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1fa91.png" alt="🪑"></div>
+        <div class="feat-name">Tres ambientes</div>
+        <div class="feat-desc">Salón picnic, lobby de latón y terraza</div>
+      </div>
+      <div class="feat-card reveal reveal-d3">
+        <div class="feat-icon"><img class="e-lg" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f943.png" alt="🥃"></div>
+        <div class="feat-name">Barra de tragos</div>
+        <div class="feat-desc">Mezcal, tequila y el Caminero de la Secina</div>
+      </div>
+      <div class="feat-card reveal reveal-d4">
+        <div class="feat-icon"><img class="e-lg" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4b0.png" alt="💰"></div>
+        <div class="feat-name">Precios justos</div>
+        <div class="feat-desc">$200–$300 por persona</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA (horizontal scroll estilo la-coyoacana) -->
+<section class="gallery">
+  <h2 class="gallery-title reveal">Así se ve <em class="logo-name">la secina</em></h2>
+  <div class="gal-scroll">
+    <div class="gal-card reveal reveal-d1">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_6.jpg?w=600" alt="La Secina" referrerpolicy="no-referrer" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22/>'">
+      <div class="gal-label">Cecina al comal</div>
+    </div>
+    <div class="gal-card reveal reveal-d2">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_4.jpg" alt="Sopes y tlayuda" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">Sopes de cecina</div>
+    </div>
+    <div class="gal-card reveal reveal-d3">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_3.jpg?w=600" alt="Tacos" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">Tacos de chapulín</div>
+    </div>
+    <div class="gal-card reveal reveal-d4">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_2.jpg?w=600" alt="Barra" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">Barra de bebidas</div>
+    </div>
+    <div class="gal-card reveal reveal-d5">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_5.jpg?w=600" alt="Postres" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">Postres de la casa</div>
+    </div>
+    <div class="gal-card reveal reveal-d1">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_6.jpg" alt="Interior" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">El ambiente</div>
+    </div>
+    <div class="gal-card reveal reveal-d2">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_4.jpg?w=600" alt="Caminero" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">Caminero</div>
+    </div>
+    <div class="gal-card reveal reveal-d3">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_3.jpg" alt="Entradas" referrerpolicy="no-referrer" onerror="this.parentElement.style.background='#1A2E2E'">
+      <div class="gal-label">Entradas</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENÚ COMPLETO (formato la-coyoacana) -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <span class="sec-tag reveal">
+      <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f37d-fe0f.png" alt="🍽"> Carta completa
+    </span>
+    <h2 class="sec-title reveal reveal-d1">El menú de <em class="logo-name">la secina</em></h2>
+    <p class="sec-sub reveal reveal-d2" style="margin-bottom: 28px;">Cecina de Yecapixtla al comal. Todo hecho al momento.</p>
+
+    <div class="menu-nav reveal reveal-d3">
+      <button class="menu-arrow" id="menu-prev" onclick="menuNav(-1)" aria-label="Anterior" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="menu-tabs" id="menu-tabs">
+        <button class="menu-tab active" onclick="showCat('entradas',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f33f.png" alt="🌿"> Entradas
+        </button>
+        <button class="menu-tab" onclick="showCat('sopas',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f372.png" alt="🍲"> Sopas
+        </button>
+        <button class="menu-tab" onclick="showCat('ensaladas',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f957.png" alt="🥗"> Ensaladas
+        </button>
+        <button class="menu-tab" onclick="showCat('mexicana',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1fad4.png" alt="🫔"> Mexicana
+        </button>
+        <button class="menu-tab" onclick="showCat('carnes',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f969.png" alt="🥩"> Carnes
+        </button>
+        <button class="menu-tab" onclick="showCat('tacos',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f32e.png" alt="🌮"> Tacos
+        </button>
+        <button class="menu-tab" onclick="showCat('postres',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f36e.png" alt="🍮"> Postres
+        </button>
+        <button class="menu-tab" onclick="showCat('bebidas',this)">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f379.png" alt="🍹"> Bebidas
+        </button>
+      </div>
+
+      <button class="menu-arrow" id="menu-next" onclick="menuNav(1)" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- ENTRADAS -->
+    <div class="menu-cat active" id="cat-entradas">
+      <div class="menu-cat-photo">
+        <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_3.jpg" alt="Entradas La Secina" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f33f.png" alt="🌿"> Entradas
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Guacamole</div></div><div class="mi-price">$125</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Queso Fundido</div></div><div class="mi-price">$110</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Frijoles de la Olla</div></div><div class="mi-price">$100</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Carne Seca</div></div><div class="mi-price">$140</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Panela Tatemado en Salsa</div></div><div class="mi-price">$140</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Aguachile de Cecina</div><div class="mi-desc">Cecina de Yecapixtla en aguachile</div><span class="mi-tag tag-sig">Especial</span></div><div class="mi-price">$180</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Ceviche de Cecina</div><div class="mi-desc">Cecina al estilo ceviche</div><span class="mi-tag tag-sig">Especial</span></div><div class="mi-price">$180</div></div>
+      </div>
+    </div>
+
+    <!-- SOPAS Y CREMAS -->
+    <div class="menu-cat" id="cat-sopas">
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f372.png" alt="🍲"> Sopas y Cremas
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Fideos Secos</div><div class="mi-desc">Como en casa de la abuela</div></div><div class="mi-price">$105</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Sopa de Tortilla</div></div><div class="mi-price">$105</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Crema de Chile</div></div><div class="mi-price">$105</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Crema de Frijol</div></div><div class="mi-price">$105</div></div>
+      </div>
+    </div>
+
+    <!-- ENSALADAS -->
+    <div class="menu-cat" id="cat-ensaladas">
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f957.png" alt="🥗"> Ensaladas
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Ensalada de Nopales</div></div><div class="mi-price">$100</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Ensalada de Palmitos</div></div><div class="mi-price">$200</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Ensalada Secinera</div><div class="mi-desc">La especialidad de la casa</div><span class="mi-tag tag-sig">Firma</span></div><div class="mi-price">$215</div></div>
+      </div>
+    </div>
+
+    <!-- MEXICANA -->
+    <div class="menu-cat" id="cat-mexicana">
+      <div class="menu-cat-photo">
+        <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_4.jpg" alt="Sopes y tlayuda" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1fad4.png" alt="🫔"> Mexicana
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Sopes (3)</div><div class="mi-desc">Con cecina, crema y queso</div></div><div class="mi-price">$135</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Chilaquiles</div><div class="mi-desc">Rojos o verdes</div></div><div class="mi-price">$210</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tlayuda</div><div class="mi-desc">Tortilla oaxaqueña con cecina, asiento y quesillo</div><span class="mi-tag tag-sig">Firma</span></div><div class="mi-price">$285</div></div>
+      </div>
+    </div>
+
+    <!-- CARNES ASADAS -->
+    <div class="menu-cat" id="cat-carnes">
+      <div class="menu-cat-photo">
+        <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_1.jpg" alt="Cecina" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f969.png" alt="🥩"> Carnes Asadas
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Pechuga Asada</div><div class="mi-desc">Pechuga entera a la plancha</div></div><div class="mi-price">$185</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Cecina Enchilada</div><div class="mi-desc">Cecina de Yecapixtla enchilada al comal</div><span class="mi-tag tag-hot">Popular</span></div><div class="mi-price">$225</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Cecina</div><div class="mi-desc">Natural, porción completa</div><span class="mi-tag tag-sig">Firma</span></div><div class="mi-price">$250</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Arrachera</div><div class="mi-desc">Arrachera a la plancha</div></div><div class="mi-price">$275</div></div>
+      </div>
+    </div>
+
+    <!-- TACOS -->
+    <div class="menu-cat" id="cat-tacos">
+      <div class="menu-cat-photo">
+        <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_3.jpg?w=800" alt="Tacos" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f32e.png" alt="🌮"> Tacos
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tacos de Aguacate (3)</div></div><div class="mi-price">$135</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tacos de Cecina (3)</div><div class="mi-desc">Con guacamole y salsa</div><span class="mi-tag tag-hot">Popular</span></div><div class="mi-price">$195</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tacos de Costra de Cecina (2)</div><div class="mi-desc">Costra de queso con cecina</div></div><div class="mi-price">$185</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tacos de Lechón (3)</div></div><div class="mi-price">$188</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tacos de Pechuga (3)</div></div><div class="mi-price">$188</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tacos de Cecina Mixta (4)</div><div class="mi-desc">Natural + enchilada</div><span class="mi-tag tag-sig">Firma</span></div><div class="mi-price">$225</div></div>
+      </div>
+    </div>
+
+    <!-- POSTRES -->
+    <div class="menu-cat" id="cat-postres">
+      <div class="menu-cat-photo">
+        <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_5.jpg?w=800" alt="Postres" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f36e.png" alt="🍮"> Postres
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Flan de la Casa</div><div class="mi-desc">Receta propia, cremoso y suave</div><span class="mi-tag tag-sig">Firma</span></div><div class="mi-price">$85</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Pay Helado de Limón o Oreo</div><div class="mi-desc">Refrescante, para cerrar bien</div></div><div class="mi-price">$85</div></div>
+      </div>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="menu-cat" id="cat-bebidas">
+      <div class="menu-cat-photo">
+        <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_4.jpg?w=800" alt="Bebidas" referrerpolicy="no-referrer" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="cat-title">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f379.png" alt="🍹"> Bebidas
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Agua del Día (355 ml)</div><div class="mi-desc">Mezcla de frutas · con refill</div></div><div class="mi-price">$31</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Refrescos (355 ml)</div><div class="mi-desc">Coca-Cola, Sprite, Manzanita Sol</div></div><div class="mi-price">$38</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Ciel Mineral (355 ml)</div></div><div class="mi-price">$38</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Velvet Soda Toronja (260 ml)</div></div><div class="mi-price">$56</div></div>
+      </div>
+      <div class="cat-title" style="margin-top: 24px;">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f37a.png" alt="🍺"> Cervezas Artesanales
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Primus Jabalí (355 ml)</div></div><div class="mi-price">$88</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">19° Norte Summer Daze (355 ml)</div></div><div class="mi-price">$106</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">19° Norte IPA Spring (355 ml)</div></div><div class="mi-price">$112</div></div>
+      </div>
+      <div class="cat-title" style="margin-top: 24px;">
+        <img class="e-md" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f943.png" alt="🥃"> Destilados y Cócteles
+      </div>
+      <div class="menu-items">
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Mezcal</div><div class="mi-desc">Selección de la casa</div></div><div class="mi-price">Consultar</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Tequila</div></div><div class="mi-price">Consultar</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Caminero</div><div class="mi-desc">El cóctel estrella · cerveza + mezcal</div><span class="mi-tag tag-hot">Must Try</span></div><div class="mi-price">Consultar</div></div>
+        <div class="menu-item"><div class="mi-info"><div class="mi-name">Cócteles de la Casa</div><div class="mi-desc">Pregunta por las opciones del día</div></div><div class="mi-price">Consultar</div></div>
+      </div>
+      <div class="menu-nota">
+        <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4ac.png" alt="💬"> Los precios de mezcales y cócteles varían por temporada. Pregunta al mesero o escríbenos.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="ig-section" id="instagram">
+  <div class="ig-header reveal">
+    <div class="ig-avatar">
+      <img src="./assets/lasecina/logo.jpg" alt="La Secina">
+    </div>
+    <div class="ig-info">
+      <div class="ig-handle">@lasecina</div>
+      <div class="ig-stats">
+        <strong>161</strong> publicaciones &nbsp;·&nbsp;
+        <strong>6.5K</strong> seguidores
+      </div>
+    </div>
+    <a class="ig-follow" href="https://www.instagram.com/lasecina/" target="_blank" rel="noopener">
+      <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4f8.png" alt="📸"> Seguir
+    </a>
+  </div>
+
+  <div class="ig-grid">
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d1">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_6.jpg?w=600" alt="Cecina al comal" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d2">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_4.jpg" alt="Sopes de cecina" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d3">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_3.jpg?w=600" alt="Tacos de chapulín" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d1">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_2.jpg?w=600" alt="Barra de bebidas" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d2">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_1.jpg" alt="Cecina de Yecapixtla" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d3">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_5.jpg?w=600" alt="Postres" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d1">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_6.jpg" alt="El ambiente" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d2">
+      <img src="https://i0.wp.com/godinchilango.mx/wp-content/uploads/2025/05/la-secina-cecina-tlayudas-tacos-chapulines-narvarte-ciudad-mexico-cdmx_4.jpg?w=600" alt="Caminero" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+    <a href="https://www.instagram.com/lasecina/" target="_blank" class="ig-post reveal reveal-d3">
+      <img src="https://www.godinezgourmet.com/wp-content/uploads/2018/09/la-secina-tlayudas-cecina-narvarte-godinez-gourmet-ciudad-mexico-cdmx_3.jpg" alt="Entradas" loading="lazy" referrerpolicy="no-referrer">
+      <div class="ig-overlay"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+    </a>
+  </div>
+
+  <a class="ig-cta reveal" href="https://www.instagram.com/lasecina/" target="_blank" rel="noopener">
+    <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4f8.png" alt="📸">
+    Ver todas las publicaciones en Instagram
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+</section>
+
+<!-- HORARIOS Y UBICACIÓN -->
+<section class="horarios" id="horarios">
+  <div class="container">
+    <span class="sec-tag sec-tag-orange reveal">
+      <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f550.png" alt="🕐"> Horarios y ubicación
+    </span>
+    <h2 class="sec-title reveal reveal-d1">¿Cuándo <em>venir?</em></h2>
+    <p class="sec-sub reveal reveal-d2">Martes a domingo — siempre con el comal prendido.</p>
+
+    <div class="hours-table reveal reveal-d3">
+      <div class="hour-row"><span class="hour-day">Lunes</span><span class="hour-closed">Cerrado</span></div>
+      <div class="hour-row"><span class="hour-day">Martes – Jueves</span><span class="hour-time">13:00 – 23:00</span></div>
+      <div class="hour-row"><span class="hour-day">Viernes</span><span class="hour-time">13:00 – 1:45</span><span class="hour-badge">Noche larga</span></div>
+      <div class="hour-row"><span class="hour-day">Sábado</span><span class="hour-time">13:00 – 1:45</span><span class="hour-badge">Noche larga</span></div>
+      <div class="hour-row"><span class="hour-day">Domingo</span><span class="hour-time">13:00 – 19:00</span></div>
+    </div>
+
+    <div class="open-indicator reveal reveal-d4">
+      <div class="dot-green"></div>
+      Abierto hoy · Martes a Domingo desde la 1 PM
+    </div>
+
+    <div class="map-wrap reveal reveal-d4">
+      <iframe
+        src="https://maps.google.com/maps?q=19.4013583,-99.1593914&z=16&output=embed"
+        allowfullscreen loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="La Secina en Google Maps">
+      </iframe>
+      <div class="address-row">
+        <span class="address-text">
+          <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4cd.png" alt="📍"> Calzada Obrero Mundial 305, Narvarte Poniente, CDMX
+        </span>
+        <a class="address-link" href="https://maps.app.goo.gl/vpE6fHjreNCbrUN9A" target="_blank" rel="noopener">Cómo llegar →</a>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center; position: relative; z-index: 1;" class="reveal">
+      <a class="btn btn-teal" href="tel:+525567302462" style="display:inline-flex; max-width:280px; margin:0 auto;">
+        <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4de.png" alt="📞"> 55 6730-2462
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <span class="sec-tag reveal">¡Reservaciones!</span>
+    <h2 class="sec-title reveal reveal-d1">¿Listo para <em>venir?</em></h2>
+    <p class="sec-sub reveal reveal-d2">Escribinos y te apartamos tu lugar. En <em class="logo-name">la secina</em> siempre hay un comal encendido esperándote.</p>
+    <div class="cta-btns reveal reveal-d3">
+      <a class="btn btn-wa" href="https://wa.me/525567302462?text=Hola%20La%20Secina%2C%20quiero%20reservar" target="_blank" rel="noopener">
+        <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4ac.png" alt="💬"> Reservar por WhatsApp
+      </a>
+      <a class="btn btn-outline-white" href="tel:+525567302462">
+        <img class="e" src="https://cdn.jsdelivr.net/npm/emoji-datasource-apple/img/apple/64/1f4de.png" alt="📞"> 55 6730-2462
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo-text">la secina</span>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/lasecina/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/lasecina/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://maps.app.goo.gl/vpE6fHjreNCbrUN9A" target="_blank" rel="noopener">Google Maps</a>
+    <a href="tel:+525567302462">55 6730-2462</a>
+  </div>
+  <div class="footer-copy">Obrero Mundial 305, Narvarte Poniente · CDMX</div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a class="float-wa" href="https://wa.me/525567302462?text=Hola%20La%20Secina%2C%20quiero%20reservar" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.107 1.51 5.838L.057 23.27c-.078.305.194.584.501.514l5.584-1.462A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.942 0-3.766-.497-5.348-1.367l-.383-.215-3.969 1.039 1.057-3.859-.235-.396A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+
+<script>
+/* ── TABS MENÚ ── */
+const CATS = ['entradas','sopas','ensaladas','mexicana','carnes','tacos','postres','bebidas'];
+let currentCat = 0;
+
+function showCat(id, btn) {
+  currentCat = CATS.indexOf(id);
+  document.querySelectorAll('.menu-cat').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('cat-' + id).classList.add('active');
+  const activeTab = btn || document.querySelectorAll('.menu-tab')[currentCat];
+  activeTab.classList.add('active');
+  activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  document.getElementById('menu-prev').disabled = currentCat === 0;
+  document.getElementById('menu-next').disabled = currentCat === CATS.length - 1;
+}
+
+function menuNav(dir) {
+  const next = Math.max(0, Math.min(CATS.length - 1, currentCat + dir));
+  showCat(CATS[next], null);
+}
+
+/* ── SCROLL REVEAL ── */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── PARALLAX SCROLL ── */
+(function() {
+  const hero = document.querySelector('.hero-inner');
+  const heroRings = document.querySelectorAll('.hero-ring');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const sy = window.scrollY;
+
+        // Logo y contenido del hero flota hacia arriba
+        if (hero) {
+          hero.style.transform = `translateY(${sy * 0.35}px)`;
+          hero.style.opacity = Math.max(0, 1 - sy / 500);
+        }
+
+        // Anillos se mueven diferente velocidad
+        heroRings.forEach((r, i) => {
+          r.style.transform = `translate(-50%, -50%) translateY(${sy * (0.1 + i * 0.05)}px) rotate(${sy * 0.02 * (i % 2 === 0 ? 1 : -1)}deg)`;
+        });
+
+        // Secciones con movimiento sutil en elementos
+        document.querySelectorAll('.feat-card').forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const offset = (rect.top / window.innerHeight - 0.5) * 20;
+          el.style.transform = `translateY(${offset}px)`;
+        });
+
+        document.querySelectorAll('.gal-card').forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const offset = (rect.top / window.innerHeight - 0.5) * (i % 2 === 0 ? 15 : -15);
+          el.style.transform = `translateY(${offset}px)`;
+        });
+
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
